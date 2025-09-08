@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>ES6 Form Demo</title>
+  <style>
+    body { font-family: sans-serif; padding: 20px; }
+    input, button { margin: 5px 0; padding: 8px; }
+    #result { margin-top: 20px; background: #f9f9f9; padding: 10px; }
+  </style>
+</head>
+<body>
+  <h2>🎉 Welcome to the ES6 Playground</h2>
+  <label>Enter your name:</label><br>
+  <input type="text" id="nameInput" /><br>
+
+  <label>Enter favorite numbers (comma-separated):</label><br>
+  <input type="text" id="numbersInput" /><br>
+
+  <button id="submitBtn">Submit</button>
+
+  <div id="result"></div>
+
+  <script>
+    showIntro();
+    function showIntro() {
+      console.log("Hoisting works! This function is called before it's defined.");
+    }
+
+    const submitBtn = document.getElementById("submitBtn");
+    const resultDiv = document.getElementById("result");
+
+    submitBtn.addEventListener("click", () => {
+      const name = document.getElementById("nameInput").value;
+      const numbersStr = document.getElementById("numbersInput").value;
+
+      const coerced = "Your name length + 5 = " + (name.length + 5);
+      const greeting = `Hello, ${name || "stranger"}!`;
+      const numArray = [...numbersStr.split(",").map(n => parseInt(n.trim()))];
+      const average = (...nums) => nums.reduce((a, b) => a + b, 0) / nums.length;
+
+      const [firstNum, secondNum] = numArray;
+      const user = { name, favoriteNumbers: numArray };
+      const { favoriteNumbers } = user;
+      const describeNumbers = nums => `You entered ${nums.length} numbers. First two: ${firstNum}, ${secondNum}`;
+
+      resultDiv.innerText = `
+${greeting}
+${coerced}
+${describeNumbers(favoriteNumbers)}
+Average: ${average(...favoriteNumbers).toFixed(2)}
+Object Destructuring: ${JSON.stringify(user)}
+      `;
+    });
+  </script>
+</body>
+</html>
