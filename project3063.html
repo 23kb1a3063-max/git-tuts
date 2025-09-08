@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>ES6 + DOM Demo</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    .highlight {
+      color: darkblue;
+      font-weight: bold;
+    }
+    button {
+      margin-top: 10px;
+      padding: 8px 15px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1 id="header">Welcome to ES6 & DOM Demo</h1>
+
+  <p id="description">Click the button to add items to the list:</p>
+
+  <ul id="item-list">
+    <li class="item">First item</li>
+    <li class="item">Second item</li>
+  </ul>
+
+  <button id="add-btn">Add Item</button>
+
+  <script>
+    
+    const header = document.getElementById('header');
+    const list = document.getElementById('item-list');
+    const button = document.getElementById('add-btn');
+    const updateHeader = (text) => {
+      header.textContent = `${text} (Updated!)`;
+      header.classList.add('highlight');
+    };
+
+    updateHeader('ES6 + DOM Demo');
+
+    let items = [...document.querySelectorAll('.item')];
+
+    const logItems = (...items) => {
+      console.log('Current list items:');
+      items.forEach(({ textContent }, index) => {
+        console.log(`  ${index + 1}: ${textContent}`);
+      });
+    };
+
+    logItems(...items);
+    let count = items.length + 1;
+    button.addEventListener('click', () => {
+      const newItem = document.createElement('li');
+      newItem.classList.add('item');
+      newItem.textContent = `New item ${count++}`;
+      list.appendChild(newItem);
+
+      items = [...document.querySelectorAll('.item')];
+      logItems(...items);
+    });
+
+    console.log('Type coercion examples:');
+    console.log(`'10' + 5 =`, '10' + 5);   
+    console.log(`'10' - 5 =`, '10' - 5);   
+    console.log(`true + 1 =`, true + 1);  
+
+
+    hoistedFunction(); 
+
+    function hoistedFunction() {
+      console.log('This function was hoisted!');
+    }
+
+   
+    const multiLineString = `
+      This is a multi-line
+      string using template literals.
+      It preserves formatting.
+    `;
+    console.log(multiLineString);
+    const [firstItem, secondItem] = items;
+    console.log('Destructured items:');
+    console.log(`First item text: ${firstItem.textContent}`);
+    console.log(`Second item text: ${secondItem.textContent}`);
+    const user = { username: 'coder123', email: 'coder@example.com', age: 30 };
+    const { username, email } = user;
+    console.log(`User info: Username is ${username}, email is ${email}`);
+
+  </script>
+</body>
+</html>
