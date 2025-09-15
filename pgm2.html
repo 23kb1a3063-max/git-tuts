@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Hello World Enhanced</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f4f4f4;
+      color: #333;
+    }
+
+    nav {
+      background-color: #007bff;
+      color: white;
+      padding: 15px;
+      text-align: center;
+    }
+
+    .container {
+      text-align: center;
+      margin-top: 80px;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
+
+    #time {
+      font-size: 1.2rem;
+      color: #555;
+    }
+
+    footer {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      background-color: #eee;
+      text-align: center;
+      padding: 10px;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <h2>My Express App</h2>
+  </nav>
+
+  <main class="container">
+    <h1 id="message">Loading...</h1>
+    <p id="time"></p>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 My Express App. All rights reserved.</p>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const message = document.getElementById('message');
+      const timeDisplay = document.getElementById('time');
+
+      const now = new Date();
+      const hours = now.getHours();
+      const greeting =
+        hours < 12 ? 'Good morning!' :
+        hours < 18 ? 'Good afternoon!' :
+        'Good evening!';
+
+      message.textContent = `${greeting} Hello World from Express!`;
+      timeDisplay.textContent = `Current time: ${now.toLocaleTimeString()}`;
+    });
+  </script>
+</body>
+</html>
