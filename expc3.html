@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>React Props Greeting Card</title>
+  <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f0f8ff;
+      text-align: center;
+      padding: 50px;
+    }
+
+    input, select {
+      padding: 10px;
+      margin: 10px;
+      font-size: 16px;
+    }
+
+    .card {
+      margin-top: 30px;
+      padding: 20px;
+      border-radius: 10px;
+      background-color: #fff;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      display: inline-block;
+      min-width: 300px;
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel">
+    // Child component: displays greeting card
+    function GreetingCard({ name, mood }) {
+      const moodMessages = {
+        happy: "Keep smiling and spread the joy!",
+        sad: "Sending you a virtual hug 💙",
+        excited: "Let's celebrate your energy!",
+        thoughtful: "Take a moment to reflect and grow."
+      };
+
+      return (
+        <div className="card">
+          <h2>Hello, {name || "Friend"}!</h2>
+          <p>{moodMessages[mood] || "Choose a mood to get a message."}</p>
+        </div>
+      );
+    }
+
+    // Parent component: collects user input and passes props
+    function GreetingApp() {
+      const [name, setName] = React.useState("");
+      const [mood, setMood] = React.useState("");
+
+      return (
+        <div>
+          <h1>🎉 Personalized Greeting Card</h1>
+          <input
+            type="text"
+            placeholder="Enter your name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+          <select value={mood} onChange={(e) => setMood(e.target.value)}>
+            <option value="">Select your mood</option>
+            <option value="happy">Happy 😊</option>
+            <option value="sad">Sad 😢</option>
+            <option value="excited">Excited 🤩</option>
+            <option value="thoughtful">Thoughtful 🤔</option>
+          </select>
+
+          <GreetingCard name={name} mood={mood} />
+        </div>
+      );
+    }
+
+    // Render the app
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<GreetingApp />);
+  </script>
+</body>
+</html>
