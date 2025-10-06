@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Hotel Paradise</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f2f7f9;
+      margin: 0;
+      padding: 20px;
+      color: #333;
+    }
+    header {
+      text-align: center;
+      padding-bottom: 20px;
+    }
+    header h1 {
+      margin: 0;
+      color: #2c3e50;
+    }
+    .hotel-info {
+      max-width: 800px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      padding: 20px;
+    }
+    .hotel-info h2 {
+      color: #2980b9;
+    }
+    .room-list {
+      list-style: none;
+      padding: 0;
+    }
+    .room-list li {
+      margin: 15px 0;
+      padding: 15px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #ecf0f1;
+      transition: background 0.3s ease;
+      cursor: pointer;
+    }
+    .room-list li:hover {
+      background: #d0e7ff;
+    }
+    .room-name {
+      font-weight: bold;
+    }
+    .room-price {
+      color: #27ae60;
+    }
+    #selected-room {
+      margin-top: 20px;
+      font-size: 1.2rem;
+      color: #c0392b;
+      text-align: center;
+      min-height: 1.5em;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Hotel Paradise</h1>
+  <p>Your comfort, our priority.</p>
+</header>
+
+<section class="hotel-info">
+  <h2>Available Rooms</h2>
+  <ul class="room-list" id="roomList">
+    <li data-price="120">
+      <span class="room-name">Standard Room</span>
+      <span class="room-price">$120 / night</span>
+    </li>
+    <li data-price="180">
+      <span class="room-name">Deluxe Room</span>
+      <span class="room-price">$180 / night</span>
+    </li>
+    <li data-price="250">
+      <span class="room-name">Suite</span>
+      <span class="room-price">$250 / night</span>
+    </li>
+  </ul>
+  <div id="selected-room"></div>
+</section>
+
+<script>
+  const roomList = document.getElementById('roomList');
+  const selectedRoomDiv = document.getElementById('selected-room');
+
+  roomList.addEventListener('click', (e) => {
+    let li = e.target;
+    // Make sure we get the <li> even if inner span clicked
+    while(li && li.tagName !== 'LI') {
+      li = li.parentElement;
+    }
+    if (li) {
+      const roomName = li.querySelector('.room-name').textContent;
+      const roomPrice = li.getAttribute('data-price');
+      selectedRoomDiv.textContent = `You selected: ${roomName} at $${roomPrice} per night.`;
+    }
+  });
+</script>
+
+</body>
+</html>
