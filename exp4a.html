@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Magic Color Box</title>
+<style>
+  body {
+    display: flex;
+    height: 100vh;
+    margin: 0;
+    background: #222;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #fff;
+    user-select: none;
+  }
+  #magicBox {
+    width: 200px;
+    height: 200px;
+    border-radius: 20px;
+    background: linear-gradient(45deg, #6a11cb, #2575fc);
+    box-shadow: 0 0 30px #2575fc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: background 1s ease, box-shadow 1s ease;
+    font-size: 1.5rem;
+    text-align: center;
+  }
+  #magicBox:hover {
+    box-shadow: 0 0 60px #ff00ff;
+  }
+</style>
+</head>
+<body>
+
+<div id="magicBox" title="Click me to change colors!">✨ Click Me! ✨</div>
+
+<script>
+  const magicBox = document.getElementById('magicBox');
+
+  const colors = [
+    { bg: 'linear-gradient(45deg, #6a11cb, #2575fc)', shadow: '#2575fc', text: "💜 Purple Blue" },
+    { bg: 'linear-gradient(45deg, #f7971e, #ffd200)', shadow: '#ffd200', text: "🌟 Golden Glow" },
+    { bg: 'linear-gradient(45deg, #11998e, #38ef7d)', shadow: '#38ef7d', text: "🍃 Fresh Green" },
+    { bg: 'linear-gradient(45deg, #ee7752, #e73c7e)', shadow: '#e73c7e', text: "🔥 Sunset Pink" },
+    { bg: 'linear-gradient(45deg, #42275a, #734b6d)', shadow: '#734b6d', text: "🌌 Midnight Purple" }
+  ];
+
+  let currentIndex = 0;
+
+  magicBox.addEventListener('click', () => {
+    currentIndex = (currentIndex + 1) % colors.length;
+    const { bg, shadow, text } = colors[currentIndex];
+    magicBox.style.background = bg;
+    magicBox.style.boxShadow = `0 0 30px ${shadow}`;
+    magicBox.textContent = text;
+  });
+</script>
+
+</body>
+</html>
